@@ -77,7 +77,16 @@ def get_text_from_image(content, prompt=str):
         try:
             final_response = json.loads(cleaned_content)
         except json.JSONDecodeError:
-            final_response = ast.literal_eval(cleaned_content)
+            try:
+                final_response = ast.literal_eval(cleaned_content)
+            except Exception:
+                return {
+                    "success": True,
+                    "message": "OCR procesado correctamente.",
+                    "ocr_context": "",
+                    "image": {},
+                    "text": cleaned_content,
+                }
         except ValueError as ve:
             return {
                 "success": False,
