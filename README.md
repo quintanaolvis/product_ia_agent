@@ -55,7 +55,7 @@ uvicorn api:app --reload
 
   ```json
   {
-    "response": { ... }
+    "message": { ... }
   }
   ```
 
