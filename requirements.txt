@@ -1,0 +1,6 @@
+requests
+pytyhon-dotenv
+FastAPI
+uvicorn
+requests
+pydantic

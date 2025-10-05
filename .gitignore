@@ -1,0 +1,4 @@
+.venv/
+.env
+prompts/
+__pycache__
