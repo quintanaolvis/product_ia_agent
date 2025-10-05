@@ -59,7 +59,10 @@ class LLMManager:
         last_user_content = None
         for msg in session_messages:
             role = msg["role"]
-            content = (msg.get("content") or "").strip()
+            content = msg.get("content")
+            if isinstance(content, list):
+                content = " ".join(str(item) for item in content)
+            content = (content or "").strip()
             if not content:
                 continue
 

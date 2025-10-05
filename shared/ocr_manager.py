@@ -61,18 +61,18 @@ def get_text_from_image(content, prompt=str):
         llm_manager = get_llm_manager()
         response_from_llm = llm_manager.invoke(session_data=session_data, prompt=prompt)
 
-        content_str = response_from_llm["choices"][0]["message"]["content"]
-        try:
-            content_json = json.loads(content_str)
-            logger.info(
-                "Respuesta del modelo (json.loads): {}".format(
-                    content_json.get("response", content_str)
-                )
+        # Extraer el texto del dict antes de limpiar
+        if isinstance(response_from_llm, dict):
+            # Ajusta la ruta según la estructura real de tu respuesta
+            response_text = (
+                response_from_llm.get("choices", [{}])[0]
+                .get("message", {})
+                .get("content", "")
             )
-        except Exception:
-            logger.info("Respuesta del modelo:", content_str)
+        else:
+            response_text = response_from_llm
 
-        cleaned_content = clean_data(response_from_llm)
+        cleaned_content = clean_data(response_text)
 
         try:
             final_response = json.loads(cleaned_content)

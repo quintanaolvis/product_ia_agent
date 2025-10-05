@@ -1,6 +1,7 @@
 import json
 from fastapi import FastAPI
 from pydantic import BaseModel
+from fastapi.middleware.cors import CORSMiddleware
 from shared.utils import (
     extract_falabella_product_data,
     get_single_falabella_product,
@@ -11,6 +12,14 @@ from shared.ocr_manager import invoke_ocr
 from shared.llm_manager import get_llm_manager
 
 app = FastAPI()
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 
 class QueryRequest(BaseModel):
@@ -41,6 +50,6 @@ def agent_query(request: QueryRequest):
     content_str = response_from_llm["choices"][0]["message"]["content"]
     try:
         content_json = json.loads(content_str)
-        return {"response": content_json.get("response", content_str)}
+        return {"message": content_json.get("response", content_str)}
     except Exception:
-        return {"response": content_str}
+        return {"message": content_str}
