@@ -65,14 +65,6 @@ uvicorn api:app --reload
 - Descarga la imagen y realiza OCR con un modelo LLM.
 - Evalúa la calidad de la información del producto y genera propuestas de mejora usando prompts personalizados.
 
-## Prompts
-
-Los prompts para OCR y clasificación están en la carpeta [`prompts/`](prompts/).
-
-## Créditos
-
-Desarrollado por el equipo IA de NTT Data.
-
 ---
 
 Para dudas o mejoras, abre un issue o contacta al equipo.
