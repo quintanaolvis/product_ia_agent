@@ -5,15 +5,11 @@ from urllib3.util.retry import Retry
 from requests.adapters import HTTPAdapter
 
 from logging import getLogger
-from dotenv import load_dotenv
-
-
-load_dotenv()
 
 logger = getLogger(__name__)
 
 
-PROMPT_BASE_SYSTEM = "test"
+PROMPT_BASE_SYSTEM = "Eres un experto clasificador de productos para una prestigiosa empresa de retail. Tu especialidad combina análisis de catálogos de productos, marketing digital y experiencia de usuario en e-commerce. Tu objetivo es identificar productos que requieren optimización en su presentación para mejorar conversión y experiencia del cliente."
 
 
 class LLMManager:

@@ -22,7 +22,8 @@ def download_image_url(url: str) -> bytes:
 def get_image_mime_type(content) -> str:
     """Determina el tipo MIME de la imagen."""
     image_type = imghdr.what(None, h=content)
-    if image_type in ["jpeg", "png"]:
+    print(f"Tipo de imagen detectado: {image_type}")
+    if image_type in ["jpg", "jpeg", "png", "webp"]:
         return f"image/{image_type}"
     return None
 

@@ -2,3 +2,4 @@
 .env
 prompts/
 __pycache__
+local.settings.json
