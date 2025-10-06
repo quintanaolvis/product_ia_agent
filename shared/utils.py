@@ -44,10 +44,10 @@ def get_prompt(prompt_key=None) -> str | None:
         if not storage_url:
             raise ValueError(f"Environment variable '{storage_url}' is not set.")
 
-        with open(storage_url, "r", encoding="utf-8-sig") as file:
-            return file.read()
+        response = requests.get(storage_url)
+        response.raise_for_status()
 
-        return None
+        return response.text
     except Exception as e:
         logger.error(f"Error retrieving prompt: {e}")
         return None
