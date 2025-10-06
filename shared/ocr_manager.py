@@ -58,12 +58,13 @@ def get_text_from_image(content, prompt=str):
             "user_id": "default_user",
             "messages": messages,
         }
+        logger.info("Invocando OCR al modelo LLM")
         llm_manager = get_llm_manager()
         response_from_llm = llm_manager.invoke(session_data=session_data, prompt=prompt)
+        logger.info("Respuesta recibida del modelo LLM para OCR")
+        logger.debug(f"Respuesta OCR: {response_from_llm}")
 
-        # Extraer el texto del dict antes de limpiar
         if isinstance(response_from_llm, dict):
-            # Ajusta la ruta según la estructura real de tu respuesta
             response_text = (
                 response_from_llm.get("choices", [{}])[0]
                 .get("message", {})
@@ -73,6 +74,7 @@ def get_text_from_image(content, prompt=str):
             response_text = response_from_llm
 
         cleaned_content = clean_data(response_text)
+        logger.debug(f"Contenido limpio OCR: {cleaned_content}")
 
         try:
             final_response = json.loads(cleaned_content)
