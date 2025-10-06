@@ -20,6 +20,9 @@ def main(req: func.HttpRequest) -> func.HttpResponse:
             json.dumps({"error": "Solicitud inválida, se esperaba JSON"}),
             status_code=400,
             mimetype="application/json",
+            headers={
+                "Access-Control-Allow-Origin": "*"
+            },  # Cambia * por tu dominio en producción
         )
 
     product_url = req_body.get("product_url")
@@ -28,6 +31,7 @@ def main(req: func.HttpRequest) -> func.HttpResponse:
             json.dumps({"error": "Falta el parámetro 'product_url'"}),
             status_code=400,
             mimetype="application/json",
+            headers={"Access-Control-Allow-Origin": "*"},
         )
 
     raw_product = get_single_falabella_product(product_url)
@@ -59,4 +63,5 @@ def main(req: func.HttpRequest) -> func.HttpResponse:
         json.dumps(result),
         status_code=200,
         mimetype="application/json",
+        headers={"Access-Control-Allow-Origin": "*"},
     )
